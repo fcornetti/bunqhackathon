@@ -4,10 +4,12 @@ import boto3
 from bunq.sdk.context.api_context import ApiContext
 from bunq.sdk.context.bunq_context import BunqContext
 from bunq.sdk.model.generated.endpoint import PaymentApiObject
-from bunq.sdk.model.generated.object_ import AmountObject, Pointer
+from bunq.sdk.model.generated.object_ import AmountObject
 from bunq.sdk.model.generated.endpoint import RequestInquiryApiObject
 from bunq.sdk.model.generated.endpoint import MonetaryAccountBankApiObject
 from bunq import ApiEnvironmentType
+
+from sdk_python.bunq.sdk.model.generated.object_ import PointerObject
 
 # Initialize S3 client to retrieve API context file
 s3 = boto3.client('s3')
@@ -46,7 +48,7 @@ def lambda_handler(event, context):
             # Make a payment to another user using proper Pointer object
             payment_id = PaymentApiObject.create(
                 amount=AmountObject(event.get('amount', '1.00'), event.get('currency', 'EUR')),
-                counterparty_alias=Pointer(
+                counterparty_alias=PointerObject(
                     type_=event.get('pointer_type', 'EMAIL'),
                     name=event.get('recipient_name', 'Recipient Name'),  # Ensure name is included
                     value=event.get('recipient_value', 'fcornetti+trainee@bunq.com')
@@ -59,7 +61,7 @@ def lambda_handler(event, context):
             # Create a payment request
             request_id = RequestInquiryApiObject.create(
                 AmountObject(event.get('amount', '10.00'), event.get('currency', 'EUR')),
-                Pointer(
+                PointerObject(
                     type_=event.get('pointer_type', 'EMAIL'),
                     name=event.get('recipient_name', 'Payment Request Recipient'),
                     value=event.get('recipient_value', 'sugardaddy@bunq.com')
@@ -73,7 +75,7 @@ def lambda_handler(event, context):
             # Make a payment to another account using IBAN
             payment_id = PaymentApiObject.create(
                 amount=AmountObject(event.get('amount', '5.00'), event.get('currency', 'EUR')),
-                counterparty_alias=Pointer(
+                counterparty_alias=PointerObject(
                     type_='IBAN',
                     name=event.get('recipient_name', 'IBAN Recipient'),
                     value=event.get('iban', 'NL63BUNQ2090666315')
