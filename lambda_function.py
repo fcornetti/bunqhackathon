@@ -9,7 +9,7 @@ from bunq.sdk.model.generated.endpoint import RequestInquiryApiObject
 from bunq.sdk.model.generated.endpoint import MonetaryAccountBankApiObject
 from bunq import ApiEnvironmentType
 
-from sdk_python.bunq.sdk.model.generated.object_ import PointerObject
+from bunq.sdk.model.generated.object_ import PointerObject
 
 # Initialize S3 client to retrieve API context file
 s3 = boto3.client('s3')
