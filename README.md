@@ -1,8 +1,10 @@
 # Blink – The Conversational Banking Assistant
+
 > **Blink.**
 > Instantly send payments or move funds to savings—no UI clicks, all via natural language powered by AI-Agents.
 
 ## :rocket: Table of Contents
+
 1. [Overview](#overview)
 2. [Features](#features)
 3. [Architecture](#architecture)
@@ -12,13 +14,11 @@
 5. [Usage](#usage)
 6. [Future Developments](#future-developments)
 
-
 ## :book: Overview
 
 Blink is a **multi-agent-system** for conversational banking built on the bunq API. A central **Supervisor Agent** parses your natural-language commands, then delegates to specialized sub-agents: the **Transaction Facilitator** for instant payments and the **Investment Facilitator** for moving funds into your savings accounts. Each step is executed securely, seamlessly, and in the blink of an eye. To understand the complexity of this system, you can have a look at the table below, provided by Hugging Face [here](https://huggingface.co/docs/smolagents/conceptual_guides/intro_agents).
 
 ![alt text](images/hugging_face_agent_framework.png)
-
 
 ## :sparkles: Features
 
@@ -29,9 +29,10 @@ Blink is a **multi-agent-system** for conversational banking built on the bunq A
 
 - **Advanced Multi-Agent Reasoning**  
   Blink isn't just a chatbot—it's a distributed **multi-agent system**. A central **Supervisor Agent** acts as a coordinator, interpreting your natural-language command and dynamically routing it to the appropriate specialist:
+
   - The **Transaction Facilitator** handles real-time payments.
   - The **Investment Facilitator** manages savings and fund allocation.  
-  This architecture enables modular, intelligent reasoning and task delegation—making Blink highly adaptable and scalable.
+    This architecture enables modular, intelligent reasoning and task delegation—making Blink highly adaptable and scalable.
 
 - **Natural-Language Payments**  
   Send money in one sentence:  
@@ -40,6 +41,7 @@ Blink is a **multi-agent-system** for conversational banking built on the bunq A
   ![alt text](images/payment_send.png)
 
 - **Dynamic Savings Management**
+
   - **Create** new savings accounts on the fly:  
     “Hey Blink, create a savings account.”
   - **Move** funds between Main and Savings accounts instantly:  
@@ -54,6 +56,7 @@ Blink is a **multi-agent-system** for conversational banking built on the bunq A
 
 ![alt text](images/architecture_diagram.png)
 ![alt text](images/investment_save.png) -->
+
 ## :building_construction: Architecture
 
 <p align="center">
@@ -66,23 +69,28 @@ Blink is a **multi-agent-system** for conversational banking built on the bunq A
   <em>Figure 2: Multi-agent collaboration with Supervisor and Facilitators</em>
 </p>
 
-
 ## :sparkles: Getting Started
+
 ### Prerequisites
+
 - Python 3.10+
 - AWS account
 
 ### Installation
+
 ```{bash}
-git clone https://github.com/fcornetti/bunqhackathon.git 
+git clone https://github.com/fcornetti/bunqhackathon.git
 ```
+
 ```{bash}
 cd bunqhackathon
 ```
+
 ```{bash}
 python -m venv .venv
 source .venv/bin/activate
 ```
+
 ```{bash}
 pip install -r requirements.txt
 ```
@@ -94,17 +102,21 @@ python3 initialize_bunq.py
 ```
 
 ### Run sdk backend
+
 ```
 fastapi run main.py
 ```
 
 ### expose it to lambda action group via ngrok
+
 ```
 ngrok http 8000
 ```
-take the url you get and use it into the lambdas url code
+
+take the url you get and use it into the lambdas url code, we where forced to do this because of the sdk was not working in the lambda
 
 ### Run Streamlit UI
+
 ```
 ./start_ui.sh
 ```
