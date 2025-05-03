@@ -1,12 +1,26 @@
 from bunq.sdk.context.api_context import ApiContext
 from bunq.sdk.context.bunq_context import BunqContext
 from bunq import ApiEnvironmentType
+import os
+
+from dotenv import load_dotenv
+
+load_dotenv()
+
+SANDBOX_API_KEY = os.getenv("SANDBOX_API_KEY")
+if SANDBOX_API_KEY is None:
+    raise ValueError("SANDBOX_API_KEY environment variable not set")
+
+ENV = os.getenv("ENV", "sandbox")  # valid values: sandbox, production
+
+environment_type = ApiEnvironmentType.SANDBOX
+if ENV == "production":
+    environment_type = ApiEnvironmentType.PRODUCTION
+
 
 # Create an API context for sandbox (easiest approach)
 api_context = ApiContext.create(
-    ApiEnvironmentType.SANDBOX,
-    "sandbox_be8e4c04575b4b3d08d02e9784ff06385cb736e334b928728c48729d",
-    "My Device Description"
+    environment_type, SANDBOX_API_KEY, "My Device Description"
 )
 
 # Save the API context to a file for future use
