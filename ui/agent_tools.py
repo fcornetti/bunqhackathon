@@ -12,7 +12,8 @@ load_dotenv()
 
 IMAGE_FOLDER = "images"
 
-AGENT_ID = os.getenv("AGENT_ID", "TESTAGENTID")
+AGENT_ID = os.getenv("AGENT_ID", "TSTALIASID")
+
 REGION = os.getenv("AWS_REGION", "eu-west-1")
 PROFILE = os.getenv("AWS_PROFILE", "default")
 
@@ -39,7 +40,7 @@ def generate_random_15digit():
 
 def invoke_bedrock_agent(inputText, sessionId, trace_container, endSession=False):
     response = bedrock_agent_runtime.invoke_agent(
-        agentAliasId="TESTAGENTID",
+        agentAliasId="TSTALIASID",
         agentId=AGENT_ID,
         sessionId=sessionId,
         inputText=inputText,

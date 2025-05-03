@@ -49,7 +49,7 @@ def create_payment(payment: PaymentRequest):
         payment_id = PaymentApiObject.create(
             amount=AmountObject(payment.amount, "EUR"),
             # TODO: change counterparty_alias
-            counterparty_alias=PointerObject("EMAIL", "fcornetti+trainee@bunq.com"),
+            counterparty_alias=PointerObject("EMAIL", payment.counterparty_alias),
             description=payment.description or "",
         ).value
         print(f"payment_id {payment_id}")
@@ -79,7 +79,6 @@ def move_to_savings(payload: AmountRequest):
     Move money to a savings account
     """
     try:
-
         # Get list of monetary accounts
         monetary_accounts = MonetaryAccountBankApiObject.list().value
 
@@ -92,7 +91,7 @@ def move_to_savings(payload: AmountRequest):
 
         # Print all found IBANs
         for i, iban in enumerate(ibans):
-            print(f"Account {i+1} IBAN: {iban}")
+            print(f"Account {i + 1} IBAN: {iban}")
 
         # Select a random IBAN
         if ibans:
@@ -110,7 +109,7 @@ def move_to_savings(payload: AmountRequest):
             print(f"payment_id {payment_id}")
             return {"payment_id": payment_id}
         else:
-            return {"error":"Please create a savings account"}
+            return {"error": "Please create a savings account"}
 
     except Exception as e:
         return {"error": str(e)}
