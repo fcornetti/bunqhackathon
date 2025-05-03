@@ -1,6 +1,6 @@
 # Blink – The Conversational Banking Assistant
-> **Blink. Type it. Done.**
-> Instantly send payments or move funds to savings—no UI clicks, all via natural language in a chatbot interface.
+> **Blink.**
+> Instantly send payments or move funds to savings—no UI clicks, all via natural language powered by AI-Agents.
 
 ## :rocket: Table of Contents
 1. [Overview](#overview)
@@ -15,14 +15,17 @@
 
 ## :book: Overview
 
-Blink is a **multi-agent** chatbot for conversational banking built on the bunq API. A central **Supervisor Agent** parses your natural-language commands, then delegates to specialized sub-agents: the **Transaction Facilitator** for instant payments and the **Investment Facilitator** for moving funds into your savings accounts. Each step is executed securely, seamlessly, and in the blink of an eye.
+Blink is a **multi-agent-system** for conversational banking built on the bunq API. A central **Supervisor Agent** parses your natural-language commands, then delegates to specialized sub-agents: the **Transaction Facilitator** for instant payments and the **Investment Facilitator** for moving funds into your savings accounts. Each step is executed securely, seamlessly, and in the blink of an eye. To understand the complexity of this system, you can have a look at the table below, provided by Hugging Face [here](https://huggingface.co/docs/smolagents/conceptual_guides/intro_agents).
 
-![alt text](images/agent_overview.png)
+![alt text](images/hugging_face_agent_framework.png)
+
 
 ## :sparkles: Features
 
 - **Seamless Chatbot Interface**  
   Interact with Blink via any chat platform—type your command and get immediate confirmation.
+
+  ![alt text](images/agent_overview.png)
 
 - **Advanced Multi-Agent Reasoning**  
   Blink isn't just a chatbot—it's a distributed **multi-agent system**. A central **Supervisor Agent** acts as a coordinator, interpreting your natural-language command and dynamically routing it to the appropriate specialist:
