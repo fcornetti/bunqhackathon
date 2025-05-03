@@ -51,3 +51,24 @@ def create_payment(payment: PaymentRequest):
         return {"payment_id": payment_id}
     except Exception as e:
         return {"error": str(e)}
+
+
+@app.post("/savings/create")
+def create_savings_account():
+    """
+    Create a new monetary account via e endpoint
+    """
+
+
+@app.post("/savings/move")
+def move_to_savings():
+    """
+    Move money to savings account via e endpoint
+    """
+
+
+@app.post("/savings/plan")
+def calculate_savings_plan():
+    """
+    Calculate savings plan via e endpoint
+    """
