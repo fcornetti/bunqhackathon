@@ -1,3 +1,5 @@
+import random
+from sre_constants import error
 from typing import Optional, Union
 from bunq.sdk.context.api_context import ApiContext
 from bunq.sdk.context.bunq_context import BunqContext
@@ -77,17 +79,39 @@ def move_to_savings(payload: AmountRequest):
     Move money to a savings account
     """
     try:
-        payment_id = PaymentApiObject.create(
-            amount=AmountObject(payload.amount, "EUR"),
-            counterparty_alias={
-                "type": "IBAN",
-                "value": "NL63BUNQ2090666315",
-                "name": "batch payment n2",
-            },
-            description="Transfer to savings",
-        ).value
-        print(f"payment_id {payment_id}")
-        return {"payment_id": payment_id}
+
+        # Get list of monetary accounts
+        monetary_accounts = MonetaryAccountBankApiObject.list().value
+
+        ibans = []
+        for account in monetary_accounts:
+            for alias in account.alias:
+                if alias.type_ == "IBAN":
+                    ibans.append(alias.value)
+                    break
+
+        # Print all found IBANs
+        for i, iban in enumerate(ibans):
+            print(f"Account {i+1} IBAN: {iban}")
+
+        # Select a random IBAN
+        if ibans:
+            random_iban = random.choice(ibans)
+            print(f"\nRandomly selected IBAN: {random_iban}")
+            payment_id = PaymentApiObject.create(
+                amount=AmountObject(payload.amount, "EUR"),
+                counterparty_alias={
+                    "type": "IBAN",
+                    "value": random_iban,
+                    "name": "batch payment n2",
+                },
+                description="Transfer to savings",
+            ).value
+            print(f"payment_id {payment_id}")
+            return {"payment_id": payment_id}
+        else:
+            return {"error":"Please create a savings account"}
+
     except Exception as e:
         return {"error": str(e)}
 
