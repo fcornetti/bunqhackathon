@@ -111,6 +111,14 @@ take the url you get and use it into the lambdas url code
 
 Make sure you have in place look at `.env.template` files
 
+### Bedrock setup:
+
+1. Enable FM models you have in plan to use
+2. Go on Bedrock > Agents > create an agent
+3. Add the prompt, attach the actions group definition based on lambda
+4. Make sure to explain params description and that the action name fits with the onces you have in the lambda
+5. Approach like microservices, split behaviours and empower ReAct with adding a supervisor that will drive the Agents
+
 ## :crystal_ball: Future Developments
 
 Blink is designed to scale—new **tools** and **specialized agents** can be integrated to automate complex operations and extend functionality.
