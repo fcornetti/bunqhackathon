@@ -60,33 +60,34 @@ def create_savings_account():
     """
     try:
         account_id = MonetaryAccountBankApiObject.create(
-            currency="EUR",
-            description="Savings Account"
+            currency="EUR", description="Savings Account"
         ).value
         print(f"account_id {account_id}")
         return {"account_id": account_id}
     except Exception as e:
         return {"error": str(e)}
 
+
 @app.post("/savings/move")
-def move_to_savings():
+def move_to_savings(amount: str):
     """
     Move money to a savings account
     """
     try:
         payment_id = PaymentApiObject.create(
-        amount=AmountObject("5.00", "EUR"),
-        counterparty_alias={
-            "type": "IBAN",
-            "value": "NL63BUNQ2090666315",
-            "name": "batch payment n2"
-        },
-        description="Transfer to savings"
+            amount=AmountObject(amount, "EUR"),
+            counterparty_alias={
+                "type": "IBAN",
+                "value": "NL63BUNQ2090666315",
+                "name": "batch payment n2",
+            },
+            description="Transfer to savings",
         ).value
         print(f"payment_id {payment_id}")
         return {"payment_id": payment_id}
     except Exception as e:
         return {"error": str(e)}
+
 
 @app.post("/savings/plan")
 def calculate_savings_plan():

@@ -1,12 +1,17 @@
 import json
 import urllib.request
 
+url = "https://8e09-31-207-9-142.ngrok-free.app/payment"
+
 
 def get_named_parameter(event, name, default=None):
     """
     Get a parameter from the lambda event
     """
-    return next((item["value"] for item in event.get("parameters", []) if item["name"] == name), default)
+    return next(
+        (item["value"] for item in event.get("parameters", []) if item["name"] == name),
+        default,
+    )
 
 
 def send_payment(amount, counterparty_alias, description):
@@ -22,7 +27,7 @@ def send_payment(amount, counterparty_alias, description):
         dict: A dictionary containing the HTTP status code and response body from the API.
               If an error occurs, it returns a 500 status code with the error message.
     """
-    url = "https://8e09-31-207-9-142.ngrok-free.app/payment"
+
     payload = {
         "amount": amount,
         "counterparty_alias": counterparty_alias,
