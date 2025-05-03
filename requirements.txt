@@ -8,3 +8,5 @@ pycryptodomex==3.22.0
 requests==2.32.3
 simplejson==3.20.1
 urllib3==1.26.20
+boto3==1.38.7
+fastapi[standard]==0.112.0
