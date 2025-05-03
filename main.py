@@ -28,8 +28,11 @@ def read_root():
     return results
 
 
-class PaymentRequest(BaseModel):
+class AmountRequest(BaseModel):
     amount: str
+
+
+class PaymentRequest(AmountRequest):
     counterparty_alias: str
     description: Optional[str] = None
 
@@ -69,13 +72,13 @@ def create_savings_account():
 
 
 @app.post("/savings/move")
-def move_to_savings(amount: str):
+def move_to_savings(payload: AmountRequest):
     """
     Move money to a savings account
     """
     try:
         payment_id = PaymentApiObject.create(
-            amount=AmountObject(amount, "EUR"),
+            amount=AmountObject(payload.amount, "EUR"),
             counterparty_alias={
                 "type": "IBAN",
                 "value": "NL63BUNQ2090666315",
