@@ -2,3 +2,4 @@ python-layer/*
 .venv
 __pycache__/
 .env
+*.conf
