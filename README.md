@@ -80,15 +80,36 @@ git clone https://github.com/fcornetti/bunqhackathon.git
 cd bunqhackathon
 ```
 ```{bash}
-python -m venv venv
-source venv/bin/activate
+python -m venv .venv
+source .venv/bin/activate
 ```
 ```{bash}
 pip install -r requirements.txt
 ```
 
-## :wrench: Usage
+#### Inizialize context
 
+```
+python3 initialize_bunq.py
+```
+
+### Run sdk backend
+```
+fastapi run main.py
+```
+
+### expose it to lambda action group via ngrok
+```
+ngrok http 8000
+```
+take the url you get and use it into the lambdas url code
+
+### Run Streamlit UI
+```
+./start_ui.sh
+```
+
+Make sure you have in place look at `.env.template` files
 
 ## :crystal_ball: Future Developments
 
