@@ -1,2 +1,3 @@
 python-layer/*
 .venv
+__pycache__/
