@@ -11,10 +11,10 @@ SANDBOX_API_KEY = os.getenv("SANDBOX_API_KEY")
 if SANDBOX_API_KEY is None:
     raise ValueError("SANDBOX_API_KEY environment variable not set")
 
-ENV = os.getenv("ENV", "sandbox")  # valid values: sandbox, production
+ENVIRONMENT = os.getenv("ENVIRONMENT", "sandbox")  # valid values: sandbox, production
 
 environment_type = ApiEnvironmentType.SANDBOX
-if ENV == "production":
+if ENVIRONMENT == "production":
     environment_type = ApiEnvironmentType.PRODUCTION
 
 
